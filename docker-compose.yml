@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+  nginx:
+    image: stolemyusername/flashcards:latest
+    deploy:
+      labels:
+        - "traefik.docker.network=traefik-net"
+        - "traefik.frontend.rule=Host:flashcards.guythomas.me"
+        - "traefik.frontend.entryPoints=http,https"
+        - "traefik.port=80"
+        - "traefik.enable=true"
+      placement:
+        constraints:
+         - node.role == manager
+    networks:
+      - traefik-net
+    volumes:
+      - flashcard-db:/src/db
+volumes:
+  flashcard-db:
+networks:
+  traefik-net:
+    external: true
