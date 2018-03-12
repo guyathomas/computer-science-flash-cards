@@ -1,7 +1,7 @@
 version: '3.1'
 
 services:
-  nginx:
+  app:
     image: stolemyusername/flashcards:latest
     deploy:
       labels:
